@@ -21,10 +21,6 @@ public class StockManager {
         stockIngrédients.put(ingredient.getNom(), quantite);
     }
 
-    public void reapprovisionnerIngredient(String nom, int quantite) {
-        stockIngrédients.put(nom, stockIngrédients.getOrDefault(nom, 0) + quantite);
-    }
-
     // Vérifier si un ingrédient est dispo
     public boolean estDisponible(Ingredient ingredient) {
         return stockIngrédients.getOrDefault(ingredient.getNom(), 0) > 0;
@@ -58,18 +54,21 @@ public class StockManager {
         return false;
     }
 
-    // Affichage pour debug
-    public void afficherStock() {
-        System.out.println("Ingrédients :");
-        stockIngrédients.forEach((nom, qte) -> System.out.println(nom + " : " + qte));
-        System.out.println("\nCupcakes du jour :");
-        stockCupcakesDuJour.forEach((nom, qte) -> System.out.println(nom + " : " + qte));
+    public Map<String, Integer> getStocksDisponibles() {
+        Map<String, Integer> disponibles = new HashMap<>();
+        for (Map.Entry<String, Integer> entry : stockIngrédients.entrySet()) {
+            if (entry.getValue() > 0) {
+                disponibles.put(entry.getKey(), entry.getValue());
+            }
+        }
+        return disponibles;
     }
 
     // Accès direct si besoin
     public Map<String, Integer> getStockIngrédients() {
         return stockIngrédients;
     }
+
 
     public Map<String, Integer> getStockCupcakesDuJour() {
         return stockCupcakesDuJour;

@@ -43,6 +43,16 @@ public class Cupcake {
         return prix;
     }
 
+    public Base getBase() {
+        return base;
+    }
+    public Creme getCreme() {
+        return creme;
+    }
+    public List<Topping> getToppings() {
+        return toppings;
+    }
+
     @Override
     public String toString() {
         return "Cupcake : " + base.getNom() + ", " + creme.getNom() + ", toppings=" + toppings;
